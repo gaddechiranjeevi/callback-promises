@@ -1,39 +1,52 @@
-const posts=[
-    {title:'Post One',body:'This is post one',createdAt: new Date().getTime()},
-    {title:'Post Two',body:'This is post two',createdAt: new Date().getTime()}
-]
-let intervalid = 0;
-
-function getPosts(){
-    setTimeout(()=>{
-
-        let output='';
-
-        posts.forEach((posts,index)=>{
-
-            output+=`<li>${posts.title} - last Edited${(new Date().getTime() - posts.createdAt)/1000}seconds ago</li>`;
-
-        });
-
-        document.body.innerHTML=output;
-
-    },1000)
+function gototrip(){
+    return new Promise((res, rej) =>{
+        setTimeout(() => {
+            res('planning to trip');
+        }, 700)
+    })
 }
-
-function createPost(post){
-
-    setTimeout(()=>{
-
-        posts.push({ ...post,createdAt: new Date().getTime()});
-
-    },2000);
+ function checkroute(){
+    return new Promise((res, rej) =>{
+        setTimeout(() => {
+            res('checking for short route');
+    }, 100);
+ })
 }
-createPost({title:'Post Three',body:'This is post three' ,createdAt : new Date().getTime(),getPosts})
-     .then(() => {
-        getPosts();
-        deletePost().then(() => (
-            getPosts()
-        ))
-     })
+ function booking(){
+    return new Promise((res, rej) =>{
+        setTimeout(() =>{
+            res('Book tickets');
+        }, 200);
+    })
+ }
+ function visiting(){
+    return new Promise((res, rej) =>{
+        setTimeout(() =>{
+            res('seeing famous places');
+        }, 300);
+    })
+ }
+ function returning(){
+    return new Promise((res, rej) =>{
+        setTimeout(() =>{
+            res('return to home');
+        }, 400);
+    })
+ }
 
-createPost({title:'Post Four',body:'This is post four'},getPosts);
+ gototrip().then((msg) => {
+    console.log(msg)
+    checkroute().then((msg1) =>{
+        console.log(msg1)
+        booking().then((msg2) =>{
+            console.log(msg2)
+            visiting().then((msg3) =>{
+                console.log(msg3)
+                returning().then((msg4) =>{
+                    console.log(msg4)
+                })
+            })
+        })
+    })
+ })
+ 
