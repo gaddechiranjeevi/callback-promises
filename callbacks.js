@@ -1,35 +1,32 @@
-const posts=[
-    {title:'Post One',body:'This is post one',createdAt: new Date().getTime()},
-    {title:'Post Two',body:'This is post two',createdAt: new Date().getTime()}
-]
-let intervalid = 0;
+function gototrip(call, call1, call2, call3){
+    setTimeout(() => {
+        console.log('planning to trip');
+        call(call1,call2,call3);
+    }, 700);
+}
+ function checkroute(call,call1,call2){
+    setTimeout(() =>{
+        console.log('checking for short route')
+        call(call1,call2);
+    }, 100);
+ }
+ function booking(call,call1){
+    setTimeout(() =>{
+        console.log('Book tickets')
+        call(call1);
+    }, 200);
+ }
+ function visiting(call){
+    setTimeout(() =>{
+        console.log('seeing famous places');
+        call();
+    }, 300);
+ }
+ function returning(){
+    setTimeout(() =>{
+        console.log('return to home');
+    }, 400);
+ }
+
+ gototrip(checkroute,booking,visiting,returning);
  
-function getPosts(){
-    setTimeout(()=>{
-
-        let output='';
-
-        posts.forEach((posts,index)=>{
-
-            output+=`<li>${posts.title} - last Edited${(new Date().getTime() - posts.createdAt)/1000}seconds ago</li>`;
-
-        });
-
-        document.body.innerHTML=output;
-
-    },1000)
-}
-
-function createPost(post,callback){
-
-    setTimeout(()=>{
-
-        posts.push({ ...post,createdAt: new Date().getTime()});
-
-        callback();
-
-    },2000);
-}
-createPost({title:'Post Three',body:'This is post three'},getPosts);
-
-createPost({title:'Post Four',body:'This is post four'},getPosts);
